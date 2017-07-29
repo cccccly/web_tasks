@@ -1,0 +1,72 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>留言板</title>
+<style >
+table{
+  table-layout:fixed;word-wrap:break-word;
+}
+</style>
+</head>
+<body>
+  <div>                     <!#留言显示div>
+    </br>
+      <% @messages.each do |c| %>
+          <table width="600" style="table-layout:fixed" border="1">
+            <tr>
+              <td width="600">
+                id：<%=c.Mes_id%> 作者：<%=c.Mes_author%> 时间：<%=c.Mes_time%>
+                <a href=<%="/delete/#{c.Mes_id}"%>>
+                  删除留言
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td width="600">
+                <%=c.Mes_text%>
+              </td>
+            </tr>
+          </table>
+      <% end %>
+  </div>
+
+  <form action="/add" method="post">
+    <textarea name="Mes_text" rows="6" cols="60"></textarea>
+    </br>
+    作者：<input name="Mes_author" style="text">
+    <input type="submit" style="background-color:green;color:white;" value="增加">
+  </form>
+
+
+
+  <form action="/" method="get">
+    输入id以查询留言:<input type="text" name="Ser_id" value="">
+    输入author以查询留言:<input type="text" name="Ser_author" value="">
+    <input type="submit" name="" value="查询"><br>
+  </form>
+  筛选板块 <br>
+  <%= @info %>
+  <div>                     <!筛选显示div>
+    </br>
+    <% if @search_1 != 1 %>
+      <% @search_1.each do |c| %>
+          <table width="600" style="table-layout:fixed" border="1">
+            <tr>
+              <td width="600">
+                id：<%=c.Mes_id%> 作者：<%=c.Mes_author%> 时间：<%=c.Mes_time%>
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td width="600">
+                <%=c.Mes_text%>
+              </td>
+            </tr>
+          </table>
+      <% end %>
+    <% end %>
+  </div>
+
+
+</body>
+</html>

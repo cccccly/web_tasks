@@ -1,0 +1,12 @@
+一.任务要求
+	https://github.com/pujiaxun/web_2017/blob/master/back-end/0.md
+二.遇到的问题
+	1.在安装linux双系统时，花了3天的时间，终于大致熟悉的安装的过程，但是由于电脑可能有些个别问题
+	在最后一步安装时，总是会卡在Ubuntu kylin界面尚未解决。
+	2.虚拟机下的Ubuntu系统运行过慢，导致开启atom编辑器太卡顿
+	3.虚拟机安装的Ubuntu17.04系统无法连接WiFi网络
+	4.对于Ruby的语法结构不太熟悉
+三.完成情况
+	1.安装系统方面还有一点问题尚未解决，现在正在使用VirtualBox虚拟机安装了Ubuntu16.04优麒麟版本
+	2.下载了atom编译器并且安装了beautify插件来编写ruby
+	3.对于编程任务暂时只是做到了基本要求
