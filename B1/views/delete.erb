@@ -7,13 +7,20 @@
 </style>
 </head>
 <body>
-<div>
-  删除成功
-  <form action="/" method="get">
-    <input type="submit" value="返回">
-  </form>
-</div>
-
-
+  <% if @find == true %>
+    <div>
+      删除成功
+      <form action="/" method="get">
+        <input type="submit" value="返回">
+      </form>
+    </div>
+  <% else %>
+    <div>
+      删除失败，ID输入错误
+      <form action="/" method="get">
+        <input type="submit" value="返回">
+      </form>
+    </div>
+  <% end %>
 </body>
 </html>

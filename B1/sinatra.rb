@@ -1,4 +1,5 @@
 require 'sinatra'
+require_relative 'operation.rb'
 
 class Message
   attr_accessor :Mes_id            #记录id
@@ -14,38 +15,10 @@ class Message
   end
 end
 
-class Operation
-  def add(text , author)
-    time = Time.new
-    mes = Message.new
-    mes.Mes_text = text
-    mes.Mes_author = author
-    mes.Mes_time = time.strftime("%Y-%m-%d %H:%M:%S")
-    $store.unshift(mes)
-    return mes.Mes_id
-  end
-
-  def delete(id)
-    $store.delete_if{|e| e.Mes_id == id}
-    $del_num += 1
-  end
-  def search
-
-  end
+configure do
+  $store = Array.new             #储存全部留言
+  $del_num = 0
 end
-
-time = Time.new
-$store = Array.new                      #储存全部留言
-m1 = Message.new
-m1.Mes_id = 1
-m1.Mes_text = "i see"
-m1.Mes_author = "god"
-m1.Mes_time = time.strftime("%Y-%m-%d %H:%M:%S")
-$store.push(m1)
-$del_num = 0
-$search_1 = Array.new                    #储存筛选作者后的记录数组
-$search_2 = Message.new                  #储存筛选ID后的记录
-
 
 
 get'/'do
@@ -58,7 +31,7 @@ get'/'do
     @info = ""
     @search_1 = Array.new
     $store.each do |c|
-      if c.Mes_id == params['Ser_id'].to_i
+      if c.Mes_id.to_s == params['Ser_id']
         @search_1.push(c)
       end
     end
@@ -88,13 +61,18 @@ post '/add' do                                                       #增加留�
     operation = Operation.new
     operation.add(params['Mes_text'],params['Mes_author'])
     @messages = $store
-    @del_info = "删除成功 已删除#{$del_num}条留言"
     redirect to('/')
   end
 end
 
 get '/delete/:id' do                                            #不能大写…………
-  operation = Operation.new
-  operation.delete(params['id'].to_i)
+  @find = false
+  $store.each do |e|
+    if params['id'] == e.Mes_id.to_s
+      operation = Operation.new
+      operation.delete(params['id'].to_i)
+      @find = true
+    end
+  end
   erb :delete
 end
